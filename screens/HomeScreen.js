@@ -16,6 +16,7 @@ import {
 import TrendingMovies from '../components/TrendingMovies';
 import MovieList from '../components/MovieList';
 import Loading from '../components/Loading';
+
 import {fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies} from '../api/moviedb';
 
 const ios = Platform.OS === 'ios';
@@ -25,7 +26,6 @@ export default function HomeScreen({navigation}) {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     getTrendingMovies();
@@ -35,9 +35,8 @@ export default function HomeScreen({navigation}) {
 
   const getTrendingMovies = async () => {
     const data = await fetchTrendingMovies({
-      page: page,
+      page: 1,
     });
-    // setPage(prev => prev + 1);
     // console.log('===>>>', data);
     if(data && data.results) {
       setTrending(data.results);
@@ -79,6 +78,8 @@ export default function HomeScreen({navigation}) {
           <ScrollView>
             {/* trending movies carousel */}
             {trending.length > 0 && <TrendingMovies data={trending} />}
+            {/* {trending.length > 0 && trending.length <= 20 ? <TrendingMovies data={trending} /> : <SmallLoading data={trending} />} */}
+            {/* {trending.length > 0 && <SmallLoading data={trending} />} */}
 
             {/* upcoming movies row */}
             {upcomingMovies.length > 0 && <MovieList title="Upcoming" data={upcomingMovies} />}
