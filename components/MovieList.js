@@ -11,14 +11,15 @@ import {
   Image,
 } from 'react-native';
 import { fallbackImagePoster, image185 } from '../api/moviedb';
+import AllMoviesScreen from '../screens/AllMoviesScreen';
 
 const {width, height} = Dimensions.get('window');
 
 export default function MovieList({title, data, hideSeeAll = false}) {
   const navigation = useNavigation();
-
+  
   const seeAllMovies = () => {
-    console.log('pressed See All movies');
+    navigation.navigate('AllMovies', title);
   };
 
   return (

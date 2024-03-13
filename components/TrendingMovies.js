@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Text,
   View,
@@ -7,13 +7,11 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
+import Carousel from 'react-native-snap-carousel';
 import {fetchTrendingMovies, image500} from '../api/moviedb';
 import {ChevronRightIcon} from 'react-native-heroicons/outline';
-import SmallLoading from '../components/SmallLoading';
 
 const {width, height} = Dimensions.get('window');
 
@@ -23,11 +21,14 @@ export default function TrendingMovies({data}) {
   const [allMovies, setAllMovies] = useState(data);
   const [nextPage, setNextPage] = useState(1);
   const [currItemIndex, setCurrItemIndex] = useState({});
-  const [loading, setLoading] = useState(true);
 
   function selectedMovie(item) {
     navigation.navigate('Movie', item);
   }
+
+  // useEffect(() => {
+  //   loadMoreMovies();
+  // },[]);
 
   async function loadMoreMovies() {
     const data = await fetchTrendingMovies({
@@ -35,30 +36,24 @@ export default function TrendingMovies({data}) {
     });
     // console.log('LOADING MORE MOVICES ===>>>', data.results);
     if (data && data.results) {
-      setLoading(false);
       setAllMovies(prev => [...prev, ...data.results]);
       setNextPage(prev => prev + 1);
       return (
-        loading ? (
-          <SmallLoading />
-        ) : (
-          <View>
-            <Text style={styles.header}>Trending</Text>
-              <Carousel
-                data={allMovies} // movies list
-                renderItem={({item}) => (
-                  <MovieCard item={item} selectedMovie={selectedMovie} />
-                )} 
-                firstItem={1}
-                inactiveSlideOpacity={0.4}
-                sliderWidth={width}
-                itemWidth={width * 0.62}
-                slideStyle={styles.carouselStyle}
-              />
-          </View>
-        )
-        
-      )
+        <View>
+          <Text style={styles.header}>Trending</Text>
+          <Carousel
+            data={allMovies} // movies list
+            renderItem={({item}) => (
+              <MovieCard item={item} selectedMovie={selectedMovie} />
+            )}
+            firstItem={1}
+            inactiveSlideOpacity={0.4}
+            sliderWidth={width}
+            itemWidth={width * 0.62}
+            slideStyle={styles.carouselStyle}
+          />
+        </View>
+      );
     }
   }
 
@@ -69,9 +64,8 @@ export default function TrendingMovies({data}) {
         <Carousel
           data={allMovies} // movies list
           renderItem={({item, index}) => (
-            // console.log('CURRENTE ITEM INDEX', index),
             setCurrItemIndex(index),
-            <MovieCard item={item} selectedMovie={selectedMovie} />
+            (<MovieCard item={item} selectedMovie={selectedMovie} />)
           )} // render an item from the list and display a component - MovieCard
           firstItem={1}
           inactiveSlideOpacity={0.4}
@@ -79,14 +73,15 @@ export default function TrendingMovies({data}) {
           itemWidth={width * 0.62}
           slideStyle={styles.carouselStyle}
         />
-        {console.log('curr item index ===', currItemIndex)}
-        {console.log('allMovies length >>>', allMovies.length - 1)}
-        {allMovies.length-1 === currItemIndex && (
-          <TouchableOpacity style={styles.arrowBtnCont} onPress={() => loadMoreMovies()}>
+        {/* {console.log('curr item index ===', currItemIndex)}
+        {console.log('allMovies length >>>', allMovies.length - 1)} */}
+        {allMovies.length - 1 === currItemIndex && (
+          <TouchableOpacity
+            style={styles.arrowBtnCont}
+            onPress={() => loadMoreMovies()}>
             <ChevronRightIcon size={20} color={'white'} />
           </TouchableOpacity>
         )}
-        
       </View>
     </View>
   );

@@ -46,6 +46,7 @@ export default function HomeScreen({navigation}) {
 
   const getUpcomingMovies = async () => {
     const data = await fetchUpcomingMovies();
+    // console.log('UPCOMING MOVIES >>>', data);
     if (data && data.results) {
       setUpcomingMovies(data.results);
     }
@@ -75,11 +76,9 @@ export default function HomeScreen({navigation}) {
         {loading ? (
           <Loading />
         ) : (
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             {/* trending movies carousel */}
             {trending.length > 0 && <TrendingMovies data={trending} />}
-            {/* {trending.length > 0 && trending.length <= 20 ? <TrendingMovies data={trending} /> : <SmallLoading data={trending} />} */}
-            {/* {trending.length > 0 && <SmallLoading data={trending} />} */}
 
             {/* upcoming movies row */}
             {upcomingMovies.length > 0 && <MovieList title="Upcoming" data={upcomingMovies} />}

@@ -68,7 +68,10 @@ export default function MovieScreen({navigation}) {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView 
+      showsVerticalScrollIndicator={false}
+      style={styles.container}
+    >
       <View>
         <SafeAreaView style={styles.btnCont}>
           <TouchableOpacity

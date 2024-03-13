@@ -56,7 +56,10 @@ export default function PersonScreen() {
   }
 
   return (
-    <ScrollView style={{backgroundColor: '#171717', flex: 1}}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={{backgroundColor: '#171717', flex: 1}}
+     >
       <View>
         <SafeAreaView style={styles.btnCont}>
           <TouchableOpacity

@@ -44,12 +44,12 @@ const fetchTrendingMovies = async (params) => {
   return apiRequest(trendingMovies, params);
 };
 
-const fetchUpcomingMovies = async () => {
-  return apiRequest(upcomingMovies);
+const fetchUpcomingMovies = async (params) => {
+  return apiRequest(upcomingMovies, params);
 };
 
-const fetchTopRatedMovies = async () => {
-  return apiRequest(topRatedMovies);
+const fetchTopRatedMovies = async (params) => {
+  return apiRequest(topRatedMovies, params);
 };
 
 // fetch person data:
