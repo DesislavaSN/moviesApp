@@ -11,7 +11,6 @@ import {
   Image,
 } from 'react-native';
 import { fallbackImagePoster, image185 } from '../api/moviedb';
-import AllMoviesScreen from '../screens/AllMoviesScreen';
 
 const {width, height} = Dimensions.get('window');
 
@@ -36,7 +35,7 @@ export default function MovieList({title, data, hideSeeAll = false}) {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.contentContainerStyle}>
+        contentContainerStyle={styles.contentContainer}>
         {data.map((item, index) => {
           return (
             <TouchableWithoutFeedback
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
   headerCont: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   header: {
     color: '#fff',
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginLeft: 5,
   },
-  contentContainerStyle: {
+  contentContainer: {
     paddingVertical: 20,
   },
 });

@@ -25,9 +25,7 @@ const {width, height} = Dimensions.get('window');
 
 export default function AllMoviesScreen() {
   const navigation = useNavigation();
-  const movieTitle = 'Movie Title Movie Title Movie Title';
   const {params: title} = useRoute();
-  // console.log('TITLE >>', title);
   const [upcomingMovies, setUpcomingMovies] = useState({});
   const [upcomingMoviesArr, setUpcomingMoviesArr] = useState([]);
   const [topRated, setTopRated] = useState({});
@@ -45,7 +43,6 @@ export default function AllMoviesScreen() {
     const data = await fetchUpcomingMovies({
       page: page + 1,
     });
-    // console.log('DATA', data);
     if (data) {
       setUpcomingMovies(data);
       setUpcomingMoviesArr(prev => [...prev, ...data.results]);
@@ -58,7 +55,6 @@ export default function AllMoviesScreen() {
     const data = await fetchTopRatedMovies({
       page: page + 1,
     });
-    // console.log('DATA', data);
     if (data) {
       setTopRated(data);
       setTopRatedArr(prev => [...prev, ...data.results]);
@@ -110,8 +106,8 @@ export default function AllMoviesScreen() {
                     />
                   </TouchableWithoutFeedback>
                   <Text style={styles.movieTitle}>
-                    {item?.title?.length > 20
-                      ? item.title.slice(0, 20) + '...'
+                    {item?.title?.length > 15
+                      ? item.title.slice(0, 15) + '...'
                       : item.title}
                   </Text>
                 </View>
@@ -141,10 +137,6 @@ export default function AllMoviesScreen() {
             Results ({topRated.total_results})
           </Text>
           <View style={styles.resultsContr}>
-          
-          {console.log('page ----', page)}
-          {console.log(' upcomingMovies.total_pages >>>>', topRated.total_pages )}
-
             {topRatedArr.map((item, i) => {
               return (
                 <View key={i} style={styles.movieCont}>
@@ -158,16 +150,14 @@ export default function AllMoviesScreen() {
                     />
                   </TouchableWithoutFeedback>
                   <Text style={styles.movieTitle}>
-                    {item?.title?.length > 20
-                      ? item.title.slice(0, 20) + '...'
+                    {item?.title?.length > 15
+                      ? item.title.slice(0, 15) + '...'
                       : item.title}
                   </Text>
                 </View>
               );
             })}
           </View>
-          {/* {console.log('arr', topRatedArr.length)} */}
-          {/* {console.log('data', topRated.total_results)} */}
           {page < topRated.total_pages ? (
             <View style={styles.arrowBtnCont}>
               <TouchableOpacity onPress={() => topRatedData()}>
@@ -212,7 +202,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 24,
     fontWeight: '800',
-    marginRight: width * 0.05,
+    // marginRight: width * 0.05,
+    marginRight: 45,
+
   },
   m: {
     color: '#eab308',

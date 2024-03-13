@@ -37,7 +37,6 @@ export default function HomeScreen({navigation}) {
     const data = await fetchTrendingMovies({
       page: 1,
     });
-    // console.log('===>>>', data);
     if(data && data.results) {
       setTrending(data.results);
       setLoading(false);
@@ -46,7 +45,6 @@ export default function HomeScreen({navigation}) {
 
   const getUpcomingMovies = async () => {
     const data = await fetchUpcomingMovies();
-    // console.log('UPCOMING MOVIES >>>', data);
     if (data && data.results) {
       setUpcomingMovies(data.results);
     }

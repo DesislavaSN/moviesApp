@@ -30,7 +30,6 @@ export default function SearchScreen({navigation}) {
   const scrollRef = useRef();
 
   const handleSearch = value => {
-    // console.log('CURR PAGE IS:', pages);
     if (value && value.length >= 3) {
       setParam(value);
       searchMovie({
@@ -40,7 +39,6 @@ export default function SearchScreen({navigation}) {
         page: pages,
       })
         .then(data => {
-          // console.log('---DATA ---', data.results);
           if (data) {
             setLoading(false);
             setResult(data.results);
@@ -61,7 +59,6 @@ export default function SearchScreen({navigation}) {
   const hanleTextDebounce = debounce(handleSearch, 800);
 
   function loadMoreMovies() {
-    // console.log('LOAD MORE MOVIES BTN PRESSED');
     setNextPage(prev => prev + 1);
     searchMovie({
       query: param,
@@ -82,7 +79,6 @@ export default function SearchScreen({navigation}) {
   }
 
   function scrollToTop() {
-    // console.log('SCROLL TO TOP BTN PRESSED');
     scrollRef.current?.scrollTo({
       y: 0,
       animation: true,
@@ -125,9 +121,6 @@ export default function SearchScreen({navigation}) {
               />
             ) : (
               result?.map((item, i) => {
-                {
-                  /* console.log('EVERY ITEM ===>>>', i+1, item.title); */
-                }
                 return (
                   <TouchableWithoutFeedback
                     key={i}

@@ -16,45 +16,44 @@ import {ChevronRightIcon} from 'react-native-heroicons/outline';
 const {width, height} = Dimensions.get('window');
 
 export default function TrendingMovies({data}) {
-  // console.log('TRENDING ==>>', data);
   const navigation = useNavigation();
   const [allMovies, setAllMovies] = useState(data);
+  // const [allMovies, setAllMovies] = useState([]);
   const [nextPage, setNextPage] = useState(1);
   const [currItemIndex, setCurrItemIndex] = useState({});
+
+  // useEffect(() => {
+  //   setAllMovies(data);
+  // }, [])
 
   function selectedMovie(item) {
     navigation.navigate('Movie', item);
   }
 
-  // useEffect(() => {
-  //   loadMoreMovies();
-  // },[]);
-
   async function loadMoreMovies() {
     const data = await fetchTrendingMovies({
       page: nextPage + 1,
     });
-    // console.log('LOADING MORE MOVICES ===>>>', data.results);
     if (data && data.results) {
       setAllMovies(prev => [...prev, ...data.results]);
       setNextPage(prev => prev + 1);
-      return (
-        <View>
-          <Text style={styles.header}>Trending</Text>
-          <Carousel
-            data={allMovies} // movies list
-            renderItem={({item}) => (
-              <MovieCard item={item} selectedMovie={selectedMovie} />
-            )}
-            firstItem={1}
-            inactiveSlideOpacity={0.4}
-            sliderWidth={width}
-            itemWidth={width * 0.62}
-            slideStyle={styles.carouselStyle}
-          />
-        </View>
-      );
     }
+    return (
+      <View>
+        <Text style={styles.header}>Trending</Text>
+        <Carousel
+          data={allMovies} // movies list
+          renderItem={({item}) => (
+            <MovieCard item={item} selectedMovie={selectedMovie} />
+          )}
+          firstItem={1}
+          inactiveSlideOpacity={0.4}
+          sliderWidth={width}
+          itemWidth={width * 0.62}
+          slideStyle={styles.carouselStyle}
+        />
+      </View>
+    );
   }
 
   return (
@@ -73,8 +72,6 @@ export default function TrendingMovies({data}) {
           itemWidth={width * 0.62}
           slideStyle={styles.carouselStyle}
         />
-        {/* {console.log('curr item index ===', currItemIndex)}
-        {console.log('allMovies length >>>', allMovies.length - 1)} */}
         {allMovies.length - 1 === currItemIndex && (
           <TouchableOpacity
             style={styles.arrowBtnCont}

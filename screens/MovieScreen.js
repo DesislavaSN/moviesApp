@@ -44,7 +44,6 @@ export default function MovieScreen({navigation}) {
   
   const getMovieDetails = async () => {
     const data = await fetchMovieDetails(item.id);
-    // console.log('MOVIE DETAILS ----->>>', data);
     if (data) {
       setMovieDetails(data);
       setLoading(false);
@@ -53,7 +52,6 @@ export default function MovieScreen({navigation}) {
 
   const getCastsMovie = async () => {
     const data = await fetchCastsMovie(item.id);
-    // console.log('DATAAAA casts >>--->>>', data.cast);
     if (data) {
       setCast(data.cast);
     }
@@ -61,7 +59,6 @@ export default function MovieScreen({navigation}) {
 
   const getSimilarMovies = async () => {
     const data = await fetchSimilarMovies(item.id);
-    // console.log('SIMILAR MOVIES =====>>', data.results);
     if (data) {
       setSimilarMovies(data.results);
     }
@@ -215,5 +212,6 @@ const styles = StyleSheet.create({
     color: 'darkgrey',
     paddingHorizontal: 15,
     marginBottom: 20,
+    textAlign: 'justify'
   },
 });

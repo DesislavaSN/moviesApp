@@ -23,7 +23,6 @@ export default function Cast({cast, navigation}) {
       <Text style={styles.header}>Top Cast</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {cast.map((person, index) => {
-          {/* console.log('PERSON -----', person); */}
           return (
             <TouchableOpacity
               key={index}
@@ -53,23 +52,31 @@ export default function Cast({cast, navigation}) {
 
 const styles = StyleSheet.create({
   castCont: {
-    padding: 20,
+    // paddingHorizontal: 20,
+    // marginHorizontal: 20,
+    // borderWidth: 1,
+    // borderColor: 'white',
+    paddingVertical: 10,
+
   },
   header: {
     color: '#fff',
     fontSize: 20,
-    // fontWeight: 'bold',
     marginBottom: 10,
+    marginHorizontal: 10
   },
   img: {
     borderWidth: 1,
     borderColor: 'darkgrey',
-    marginRight: 20,
+    // marginRight: 20,
     borderRadius: 100,
     height: 70,
     width: 70,
+    marginLeft: 10,
   },
   castInfo: {
     color: 'darkgrey',
+    marginLeft: 10,
+
   },
 });

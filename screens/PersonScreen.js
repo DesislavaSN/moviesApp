@@ -32,7 +32,6 @@ export default function PersonScreen() {
   const [personDetails, setPersonDetails] = useState({});
   const [personMovies, setPersonMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  // console.log('PERSON SHORT INFO ------', item);
 
   useEffect(() => {
     getPersonDetails();
@@ -49,7 +48,6 @@ export default function PersonScreen() {
 
   const getPersonMovies = async () => {
     const data = await fetchPersonMovies(item.id);
-    // console.log('PERSON MOVIES ====>>>>', data.cast);
     if (data) {
       setPersonMovies(data.cast);
     }
@@ -150,8 +148,6 @@ const styles = StyleSheet.create({
   btnCont: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // position: 'absolute',
-    // zIndex: 20,
     marginTop: 20,
     marginBottom: 30,
     width: width,
@@ -239,5 +235,6 @@ const styles = StyleSheet.create({
     color: '#D3D3D3',
     fontSize: 18,
     marginTop: 10,
+    textAlign: 'justify',
   },
 });
